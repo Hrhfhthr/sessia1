@@ -1,0 +1,56 @@
+﻿<Window x:Class="test2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:test2"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="518" Width="1096">
+    <Grid>
+        <DataGrid x:Name="dataG" Margin="10,56,200,10" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="{Binding Clr}"></Setter>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Наименование" Binding="{Binding FullName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Поставщик" Binding="{Binding Vendor}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Цена" Binding="{Binding Price}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Скидка" Binding="{Binding Discount}"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Цена с учётом скидки" MinWidth="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Price}" TextDecorations="Strikethrough"></TextBlock>
+                                <TextBlock Text=" "></TextBlock>
+                                <TextBlock Text="{Binding WDis}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Кол-во" Binding="{Binding Count}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Описание" Binding="{Binding Description}"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Изобр">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Width="35" Height="35" Source="{Binding PicPath}"></Image>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label x:Name="all" Content="-" HorizontalAlignment="Left" Margin="10,17,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <ComboBox x:Name="CB1" Margin="0,58,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="185" SelectionChanged="CB1_SelectionChanged">
+            <ComboBoxItem>0%-9,99%</ComboBoxItem>
+            <ComboBoxItem>10%-14,99%</ComboBoxItem>
+            <ComboBoxItem>15% и более</ComboBoxItem>
+            <ComboBoxItem>Все диапазоны</ComboBoxItem>
+        </ComboBox>
+        <ComboBox x:Name="CB2" Margin="0,85,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="185" SelectionChanged="CB2_SelectionChanged">
+            <ComboBoxItem>По убыванию</ComboBoxItem>
+            <ComboBoxItem>По возрастанию</ComboBoxItem>
+        </ComboBox>
+
+    </Grid>
+</Window>
